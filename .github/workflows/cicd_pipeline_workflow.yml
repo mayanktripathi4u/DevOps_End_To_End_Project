@@ -1,0 +1,67 @@
+# This Pipeline will manage CloudRun deployment via Terraform
+
+name: 'CICD Pipeline'
+
+on: 
+  push:
+    branches:
+      - 'main'
+      - 'dev'
+    paths:
+      # This will ensure to kick start wit the deployment if there is any change to these directories.
+      - 'infra/**'
+      - 'src/**'
+
+concurrency: ${{ github.repository }}
+
+jobs:
+  tf_workspace:
+    name: 'CICD Job for TF deployment'
+    runs-on: 'ubuntu-latest'
+
+    steps:
+      - name: GIT Checkout
+        id: 'git-checkout'
+        uses: "actions/checkout@v4"
+
+      - name: Terraform Init
+        id: 'tf-init'
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.secret_json_gcp_key }}
+        run: |
+          cd ./infra
+          terraform init
+          pwd
+
+      - name: Terraform Plan
+        id: 'tf-plan'
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.SECRET_JSON_GCP_KEY }}
+        run: |
+          cd ./infra
+          terraform plan
+          pwd
+
+      - name: Terraform Apply
+        id: 'tf-apply'
+        if: |
+          github.ref == 'refs/heads/main'
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.SECRET_JSON_GCP_KEY }}
+        run: |
+          cd ./infra
+          terraform apply --auto-approved
+          pwd
+
+      - name: Upload File
+        id: 'python-upload'
+        if: |
+          github.ref == 'refs/heads/main'
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.SECRET_JSON_GCP_KEY }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/cred.json
+        run: |
+          cd ./src
+          echo -m "$GOOGLE_CREDENTIALS" > $GOOGLE_APPLICATION_CREDENTIALS
+          pythion gcsUpload.py
+          rm $GOOGLE_APPLICATION_CREDENTIALS
