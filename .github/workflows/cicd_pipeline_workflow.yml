@@ -12,6 +12,7 @@ on:
       # This will ensure to kick start wit the deployment if there is any change to these directories.
       - 'infra/**'
       - 'src/**'
+      - 'data/**'
 
 concurrency: ${{ github.repository }}
 
@@ -51,7 +52,7 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.SECRET_JSON_GCP_KEY }}
         run: |
           cd ./infra
-          terraform apply --auto-approved
+          terraform apply --auto-approve
           pwd
 
       - name: Upload File
@@ -64,5 +65,6 @@ jobs:
         run: |
           cd ./src
           echo -m "$GOOGLE_CREDENTIALS" > $GOOGLE_APPLICATION_CREDENTIALS
+          pip install gcloud
           pythion gcsUpload.py
           rm $GOOGLE_APPLICATION_CREDENTIALS
