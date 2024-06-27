@@ -98,6 +98,10 @@ git add .
 git commit -m "feat: adding basic coding and setup GH workflow"
 
 git push -u origin feature/firstbranch
+
+# or just
+git push
+
 # For above you may need the PAT token, copy and paste in terminal to proceed if requested.
 
 ```

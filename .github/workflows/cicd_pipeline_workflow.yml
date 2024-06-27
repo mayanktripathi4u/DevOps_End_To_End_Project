@@ -66,5 +66,5 @@ jobs:
           cd ./src
           echo -m "$GOOGLE_CREDENTIALS" > $GOOGLE_APPLICATION_CREDENTIALS
           pip install gcloud
-          python gcsUpload.py
+          python src/gcsUpload.py
           rm $GOOGLE_APPLICATION_CREDENTIALS
