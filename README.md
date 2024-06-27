@@ -103,7 +103,13 @@ git push -u origin feature/firstbranch
 ```
 
 Next is to navigate to GitHub web browser, and you will see something similar as below indicating "... had recently pushes x seconds agaon".
-Go ane verify the Workflow Pipeline.
+![alt text](image.png)
+
+Go and verify the Workflow Pipeline in "Actions" tab.
+
+This will ensure that the workflow started for the branch as well, and executed the steps for terraform init and plan, and skipped the terraform apply & python upload, as for these two we set the rule to trigger only for main branch.
+
+Once verified, click on "Compare & pull request" followed with the "Merge pull request", this will also trigger the workflow pipeline, so verify it as well. As this time we have merged the changes into main branch, we should see the other two steps are also executed.
 
 
 
