@@ -84,7 +84,26 @@ One of the option is to use linux command as `cat keys.json | tr -s '\n' ' '`
 
 Now we have to store the keys secetrely because this is very sesitive information. For this navigate to GitHub. `github > Settings > Secrets and variables > Actions > New repository secret` provide the name "SECRET_JSON_GCP_KEY" and paste the key which we converted to single line above, and add secret.
 
-All set for the access, and now work on writing the code for [GH Workflows]()
+All set for the access, and now work on writing the code for [GH Workflows](/.github/workflows/cicd_pipeline_workflow.yml)
+
+Basic coding is completed. Now lets check the git status.
+
+```
+git branch
+
+git status
+
+git add .
+
+git commit -m "feat: adding basic coding and setup GH workflow"
+
+git push -u origin feature/firstbranch
+# For above you may need the PAT token, copy and paste in terminal to proceed if requested.
+
+```
+
+Next is to navigate to GitHub web browser, and you will see something similar as below indicating "... had recently pushes x seconds agaon".
+Go ane verify the Workflow Pipeline.
 
 
 

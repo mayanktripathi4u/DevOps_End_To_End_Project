@@ -7,6 +7,7 @@ on:
     branches:
       - 'main'
       - 'dev'
+      - 'feature/firstbranch'
     paths:
       # This will ensure to kick start wit the deployment if there is any change to these directories.
       - 'infra/**'
