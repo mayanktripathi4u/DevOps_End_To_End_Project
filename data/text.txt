@@ -1,2 +1,2 @@
 Some random file for testing.
-Version 3
+Version 4
