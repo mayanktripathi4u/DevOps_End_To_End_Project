@@ -116,9 +116,28 @@ This will ensure that the workflow started for the branch as well, and executed 
 Once verified, click on "Compare & pull request" followed with the "Merge pull request", this will also trigger the workflow pipeline, so verify it as well. As this time we have merged the changes into main branch, we should see the other two steps are also executed.
 
 
+# Notes
+https://www.googlecloudcommunity.com/gc/Developer-Tools/apt-get-install-google-cloud-sdk-stopped-working/m-p/710520#:~:text=google%2Dcloud%2Dsdk%20is%20deprecated,with%20google%2Dcloud%2Dcli.
+
+* google-cloud-sdk is deprecated, replaced by google-cloud-cli for command-line tools and individual client libraries.
+* google-cloud-cli offers modularity and flexibility.
+* Python client libraries are still compatible with google-cloud-cli.
+* Adjust import statements and access methods if your application isn't working smoothly.
+* Check client library documentation for compatibility updates or usage changes.
 
 
+**Whats the difference between the gcloud and google-cloud modules in python?**
 
+`python -m pip install gcloud`
 
+vs
+
+`python -m pip install google-cloud`
+
+It went from gcloud to google-cloud and later to google-cloud-*
+
+It is now strongly recommended to install the specific google cloud package you would like to use with your application, as the google-cloud package has been deprecated.
+
+gcloud is now a command-line tool that comes with the Cloud SDK
 
 
