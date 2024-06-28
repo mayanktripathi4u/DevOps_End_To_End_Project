@@ -59,8 +59,8 @@ jobs:
 
       - name: Set up Google Cloud credentials
         env:
-          GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-        run: echo "$GCP_CREDENTIALS" > $GITHUB_WORKSPACE/cred.json
+          GOOGLE_CREDENTIALS: ${{ secrets.SECRET_JSON_GCP_KEY }}
+        run: echo "$GOOGLE_CREDENTIALS" > $GITHUB_WORKSPACE/cred.json
         shell: bash
 
       - name: Debug credentials file
