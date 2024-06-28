@@ -57,6 +57,22 @@ jobs:
           terraform apply --auto-approve
           pwd
 
+      - name: Set up Google Cloud credentials
+        env:
+          GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+        run: echo "$GCP_CREDENTIALS" > $GITHUB_WORKSPACE/cred.json
+        shell: bash
+
+      - name: Debug credentials file
+        run: |
+          echo "Content of cred.json:"
+          cat $GITHUB_WORKSPACE/cred.json
+          echo "File size:"
+          ls -l $GITHUB_WORKSPACE/cred.json
+          echo "File content length:"
+          wc -c < $GITHUB_WORKSPACE/cred.json
+
+
       - name: Upload File
         id: 'python-upload'
         if: |
