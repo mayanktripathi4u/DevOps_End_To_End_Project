@@ -90,8 +90,9 @@ jobs:
 
       - name: Upload File
         id: 'python-upload'
-        if: success()
-        if: |
+        # if: success()
+        # if: |
+        if: success() && |
           github.ref == 'refs/heads/main'
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.SECRET_JSON_GCP_KEY }}
