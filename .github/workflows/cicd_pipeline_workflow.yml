@@ -72,6 +72,9 @@ jobs:
           echo "File content length:"
           wc -c < $GITHUB_WORKSPACE/cred.json
 
+          echo "Generated content With SHA256:"
+          sha256sum $GITHUB_WORKSPACE/cred.json
+
 
       - name: Upload File
         id: 'python-upload'
