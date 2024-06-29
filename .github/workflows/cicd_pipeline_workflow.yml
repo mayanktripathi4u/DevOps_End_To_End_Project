@@ -75,9 +75,22 @@ jobs:
           echo "Generated content With SHA256:"
           sha256sum $GITHUB_WORKSPACE/cred.json
 
+      - name: Validate credentials file
+        run: |
+          python - <<EOF
+          import json
+          try:
+              with open("${{ github.workspace }}/cred.json", 'r') as file:
+                  json.load(file)
+              print("Valid JSON")
+          except json.JSONDecodeError as e:
+              print(f"Invalid JSON: {e}")
+              exit(1)
+          EOF
 
       - name: Upload File
         id: 'python-upload'
+        if: success()
         if: |
           github.ref == 'refs/heads/main'
         env:
